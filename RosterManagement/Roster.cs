@@ -57,7 +57,6 @@ namespace RosterManagement
         public List<string> Roster()
         {
             var cadets = new List<string>();
-            _roster.OrderBy(element => element.Key);
             foreach(int index in _roster.Keys.OrderBy(element=>element)){
                 cadets.AddRange(_roster[index].OrderBy(element => element).ToList());
             }
