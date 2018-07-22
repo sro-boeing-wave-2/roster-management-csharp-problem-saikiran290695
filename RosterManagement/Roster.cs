@@ -11,8 +11,7 @@ namespace RosterManagement
         public CodeSchool()
         {
             _roster = new Dictionary<int, List<String>>();
-        }
-        
+        }        
         /// <summary>
         /// Should be able to Add Student to a Particular Wave
         /// </summary>
@@ -25,13 +24,13 @@ namespace RosterManagement
             try
             {
                 _roster[wave].AddRange(students);
+                _roster[wave].Sort();
             }
             catch
             {
                 _roster.Add(wave, students);
             }
-            }
-
+        }
         /// <summary>
         /// Returns all the Cadets in a given wave
         /// </summary>
@@ -43,13 +42,13 @@ namespace RosterManagement
             try
             {
                 list = _roster[wave];
-                return list.OrderBy(element => element).ToList();
+                return list.ToList();
             }
-            catch {
+            catch
+            {
                 return list;
             }
         }
-
         /// <summary>
         /// Return all the cadets in the CodeSchool
         /// </summary>
@@ -57,8 +56,9 @@ namespace RosterManagement
         public List<string> Roster()
         {
             var cadets = new List<string>();
-            foreach(int index in _roster.Keys.OrderBy(element=>element)){
-                cadets.AddRange(_roster[index].OrderBy(element => element).ToList());
+            foreach(int index in _roster.Keys.OrderBy(element => element))
+            {
+                cadets.AddRange(_roster[index].ToList());
             }
             return cadets;
         }
